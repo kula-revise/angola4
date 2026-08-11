@@ -66,12 +66,12 @@
   }
 
   /* ---- DARK MODE TOKEN RE-POINT ---------------------------------------
-     The skin supplies body.alt values for the thirteen identity variables.
+     The skin supplies body.dark values for the thirteen identity variables.
      Everything derived re-points here, once, for every unit. This is the
      engine-level fix for the three defects logged in MOBILE_FIXES_HANDOVER:
      a skin no longer needs the patch block at all.
      ------------------------------------------------------------------- */
-  body.alt {
+  body.dark {
     --muted:      var(--fade);
     --hair:       rgba(255,255,255,0.14);
     --hair-strong:rgba(255,255,255,0.26);
@@ -89,11 +89,9 @@
     --inset:  rgba(255,255,255,0.05);
   }
   /* Key term chips keep a visible edge once the ground inverts. */
-  body.alt .kt-term { border-color: var(--hair-strong); }
-  body.alt .kt-term summary { color: var(--ink); }
-  body.alt .kt-label { border-top-color: var(--hair-strong); }
-  /* v2 dimmed the options a learner did not pick; at 0.45 they vanish on a dark ground. */
-  body.alt .option.dimmed, body.alt .option-btn.dimmed { opacity: 0.72; }
+  body.dark .kt-term { border-color: var(--hair-strong); }
+  body.dark .kt-term summary { color: var(--ink); }
+  body.dark .kt-label { border-top-color: var(--hair-strong); }
 
   /* ---- MODE TOGGLE. Fixed bottom right, 44px minimum tap target. ---- */
   .mode-toggle {
@@ -144,11 +142,19 @@
   --paper: #F7F8F6;   /* cards */
   --cut:   #EDF0EE;   /* insets, sources, carousels */
   --ink:   #1A2327;   /* body text */
-  --clay:  #5C6B73;   /* stage tags, quiet labels: steel, not terracotta */
-  --fade:  #79858B;   /* muted text, captions */
+  /* Stage tags and quiet labels. Was #5C6B73, which cleared 4.5 on a card but
+     measured 4.43 on the --sand page ground, where the eyebrows actually sit. */
+  --clay:  #55636B;   /* stage tags, quiet labels: steel, not terracotta */
+  /* Muted text: captions, attributions, the question counter, the running tally.
+     The previous value measured 3.04 against the grounds it actually sits on. */
+  --fade:  #5C666E;   /* muted text, captions */
   /* accents: brick red for the argued line, deep teal for the settled one */
   --a1: #9C3D2E;  --a1-rgb: 156,61,46;
   --a2: #24565C;  --a2-rgb: 36,86,92;
+  /* The two hover steps are derived, not identity. Left in the engine block they
+     kept the engine's bottle green against this skin's deep teal. */
+  --ink-deep: #13191C;
+  --a2-deep:  #1A3E42;
   /* type: a transitional serif for the history, mono for anything with a symbol */
   --serif: Georgia, 'Times New Roman', serif;
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -227,32 +233,37 @@ body {
 
 /* Dark mode. The slate ground goes to deep ink and the papers to a cold
    charcoal, so the chamber reads as the same room after hours. */
-body.alt {
+body.dark {
   --sand:  #141A1D;
   --paper: #1D2529;
   --cut:   #232C31;
   --ink:   #E6EBEA;
   --clay:  #93A3AB;
   --fade:  #8B979D;
-  --a1: #D0664F;  --a1-rgb: 208,102,79;
+  /* Was #D0664F: 4.37 on the card and 3.86 on the --cut insets, where the option
+     letters, the rank numbers and the source attributions sit. */
+  --a1: #E0836E;  --a1-rgb: 224,131,110;
   --a2: #58A6A2;  --a2-rgb: 88,166,162;
+  /* On a dark ground a hover step goes lighter, not deeper. */
+  --ink-deep: #FFFFFF;
+  --a2-deep:  #7CBFBB;
 }
-body.alt { background-image:
+body.dark { background-image:
   repeating-linear-gradient(90deg, transparent 0 38px, rgba(230,235,234,0.035) 38px 39px) !important; }
-body.alt .card, body.alt .source, body.alt .stat-wrap,
-body.alt .carousel, body.alt .kt { border-color: rgba(88,166,162,0.28) !important; }
-body.alt .btn-begin { border-color: var(--ink) !important; color: var(--ink) !important; }
-body.alt .btn-begin:hover { background: var(--ink) !important; color: var(--sand) !important; }
-body.alt .mode-toggle { background: var(--paper); border-color: rgba(230,235,234,0.24); }
+body.dark .card, body.dark .source, body.dark .stat-wrap,
+body.dark .carousel, body.dark .kt { border-color: rgba(88,166,162,0.28) !important; }
+body.dark .btn-begin { border-color: var(--ink) !important; color: var(--ink) !important; }
+body.dark .btn-begin:hover { background: var(--ink) !important; color: var(--sand) !important; }
+body.dark .mode-toggle { background: var(--paper); border-color: rgba(230,235,234,0.24); }
 
 /* The RECALL chip keeps its light background in dark mode, so it glares.
    Tier chips get dark-mode grounds of their own. */
-body.alt .chip { background: rgba(88,166,162,0.16) !important; color: #BFE0DD !important; }
-body.alt .chip-recall,  body.alt .chip-extract   { background: rgba(208,102,79,0.20) !important; color: #F0BAAB !important; }
-body.alt .chip-understand, body.alt .chip-interpret { background: rgba(88,166,162,0.18) !important; color: #B7DEDA !important; }
-body.alt .chip-apply,   body.alt .chip-evaluate  { background: rgba(230,235,234,0.16) !important; color: #E6EBEA !important; }
+body.dark .chip { background: rgba(88,166,162,0.16) !important; color: #BFE0DD !important; }
+body.dark .chip-recall,  body.dark .chip-extract   { background: rgba(208,102,79,0.20) !important; color: #F0BAAB !important; }
+body.dark .chip-understand, body.dark .chip-interpret { background: rgba(88,166,162,0.18) !important; color: #B7DEDA !important; }
+body.dark .chip-apply,   body.dark .chip-evaluate  { background: rgba(230,235,234,0.16) !important; color: #E6EBEA !important; }
 /* Options need a visible edge against the charcoal card. */
-body.alt .option-btn, body.alt .opt-btn { border-color: rgba(230,235,234,0.20) !important; }
+body.dark .option-btn, body.dark .opt-btn { border-color: rgba(230,235,234,0.20) !important; }
 
 
 /* ---- DARK MODE STATE COLOURS -----------------------------------------------
@@ -260,68 +271,66 @@ body.alt .option-btn, body.alt .opt-btn { border-color: rgba(230,235,234,0.20) !
    Left alone they produce pale text on pale grounds. */
 
 /* Answer states: dark grounds with a coloured edge, text stays --ink. */
-body.alt .option-btn.correct {
+body.dark .option-btn.correct {
   background: rgba(88,166,162,0.16) !important;
   border-color: #58A6A2 !important;
   color: var(--ink) !important;
 }
-body.alt .option-btn.wrong {
+body.dark .option-btn.wrong {
   background: rgba(208,102,79,0.16) !important;
   border-color: #D0664F !important;
   color: var(--ink) !important;
 }
-body.alt .option-btn.correct .opt-text,
-body.alt .option-btn.wrong   .opt-text { color: var(--ink) !important; }
-body.alt .option-btn.correct .opt-letter { color: #7FC7C2 !important; }
-body.alt .option-btn.wrong   .opt-letter { color: #E89A87 !important; }
-body.alt .opt-mark { color: var(--ink) !important; }
+body.dark .option-btn.correct .opt-text,
+body.dark .option-btn.wrong   .opt-text { color: var(--ink) !important; }
+body.dark .option-btn.correct .opt-letter { color: #7FC7C2 !important; }
+body.dark .option-btn.wrong   .opt-letter { color: #E89A87 !important; }
+body.dark .opt-mark { color: var(--ink) !important; }
 /* v2 dims the options a learner did not pick; at 0.45 on a dark ground they vanish. */
-body.alt .option-btn.dimmed { opacity: 0.72 !important; }
 
 /* The full-check button is dark-on-dark once the ground inverts. */
-body.alt .primary-btn {
+body.dark .primary-btn {
   background: var(--cut) !important;
   border: 1px solid rgba(88,166,162,0.40) !important;
   color: var(--ink) !important;
 }
-body.alt .primary-btn:hover { background: #2B363C !important; }
-body.alt .primary-btn .btn-title { color: var(--ink) !important; }
-body.alt .primary-btn .btn-sub,
-body.alt .primary-btn .btn-arrow { color: var(--clay) !important; }
+body.dark .primary-btn:hover { background: #2B363C !important; }
+body.dark .primary-btn .btn-title { color: var(--ink) !important; }
+body.dark .primary-btn .btn-sub,
+body.dark .primary-btn .btn-arrow { color: var(--clay) !important; }
 
 /* Section rows and the small action button. */
-body.alt .section-btn { border-color: rgba(230,235,234,0.18) !important; color: var(--ink) !important; }
-body.alt .section-btn:hover { background: var(--cut) !important; border-color: var(--a2) !important; }
-body.alt .primary-btn-small { background: var(--a2) !important; color: #0E1518 !important; }
-body.alt .primary-btn-small:hover:not(:disabled) { background: #6FBCB7 !important; }
-body.alt .secondary-btn { border-color: rgba(230,235,234,0.30) !important; color: var(--ink) !important; }
-body.alt .secondary-btn:hover:not(:disabled) { background: var(--cut) !important; }
+body.dark .section-btn { border-color: rgba(230,235,234,0.18) !important; color: var(--ink) !important; }
+body.dark .section-btn:hover { background: var(--cut) !important; border-color: var(--a2) !important; }
+body.dark .primary-btn-small { background: var(--a2) !important; color: #0E1518 !important; }
+body.dark .primary-btn-small:hover:not(:disabled) { background: #6FBCB7 !important; }
+body.dark .secondary-btn { border-color: rgba(230,235,234,0.30) !important; color: var(--ink) !important; }
+body.dark .secondary-btn:hover:not(:disabled) { background: var(--cut) !important; }
 
 /* The explanation panel and the quiz footer links. */
-body.alt .explanation { background: var(--cut) !important; border-color: rgba(88,166,162,0.28) !important; }
-body.alt .expl-text { color: var(--ink) !important; }
-body.alt .quiz-foot a, body.alt .quiz-foot { color: var(--clay) !important; }
+body.dark .explanation { background: var(--cut) !important; border-color: rgba(88,166,162,0.28) !important; }
+body.dark .expl-text { color: var(--ink) !important; }
+body.dark .quiz-foot a, body.dark .quiz-foot { color: var(--clay) !important; }
 
 
 /* The lesson engine uses .option where the quiz uses .option-btn, so the
    state overrides have to name both or half the product stays broken. */
-body.alt .option { background: var(--cut) !important; border-color: rgba(230,235,234,0.18) !important; color: var(--ink) !important; }
-body.alt .option.selected { background: rgba(208,102,79,0.14) !important; border-color: #D0664F !important; }
-body.alt .option.correct {
+body.dark .option { background: var(--cut) !important; border-color: rgba(230,235,234,0.18) !important; color: var(--ink) !important; }
+body.dark .option.selected { background: rgba(208,102,79,0.14) !important; border-color: #D0664F !important; }
+body.dark .option.correct {
   background: rgba(88,166,162,0.16) !important;
   border-color: #58A6A2 !important;
   color: var(--ink) !important;
 }
-body.alt .option.wrong {
+body.dark .option.wrong {
   background: rgba(208,102,79,0.16) !important;
   border-color: #D0664F !important;
   color: var(--ink) !important;
 }
-body.alt .option.correct .opt-text,
-body.alt .option.wrong   .opt-text { color: var(--ink) !important; }
-body.alt .option.correct .opt-letter { color: #7FC7C2 !important; }
-body.alt .option.wrong   .opt-letter { color: #E89A87 !important; }
-body.alt .option.dimmed { opacity: 0.72 !important; }
+body.dark .option.correct .opt-text,
+body.dark .option.wrong   .opt-text { color: var(--ink) !important; }
+body.dark .option.correct .opt-letter { color: #7FC7C2 !important; }
+body.dark .option.wrong   .opt-letter { color: #E89A87 !important; }
 
 
 /* The toggle is fixed bottom right and lands on the Continue button on a short
@@ -344,10 +353,10 @@ body { padding-bottom: 4.5rem !important; }
   padding-top: 0.6rem;
 }
 .figure img { border: 1px solid rgba(36,86,92,0.30) !important; }
-body.alt .figure img { border-color: rgba(88,166,162,0.30) !important; }
-body.alt .figure figcaption { border-top-color: rgba(88,166,162,0.24); }
+body.dark .figure img { border-color: rgba(88,166,162,0.30) !important; }
+body.dark .figure figcaption { border-top-color: rgba(88,166,162,0.24); }
 /* An archival photograph should not glare against the dark ground. */
-body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
+body.dark .figure img { filter: brightness(0.9) contrast(1.02); }
 
 
 
@@ -393,7 +402,9 @@ body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
   .cover-time { font-family: var(--sans); font-size: 0.8rem; color: var(--fade); margin-top: 1.4rem; letter-spacing: 0.02em; }
   .btn-begin { font-family: var(--sans); display: inline-flex; align-items: center; gap: 0.8rem; padding: 1.05rem 2.2rem; background: var(--ink); color: var(--on-ink); border: none; cursor: pointer; font-size: 1.12rem; font-weight: 700; }
   .btn-begin:hover { background: var(--ink-deep); }
-  .btn-begin .sa { color: var(--a1); font-size: 1.3rem; }
+  /* The arrow takes the button's own text colour. Painted --a1 it disappears on
+     any skin that also makes the Begin button --a1 or close to it. */
+  .btn-begin .sa { color: currentColor; font-size: 1.3rem; }
   .skip-link { display: block; margin: 1.6rem auto 0; background: transparent; border: none; color: var(--fade); font-family: var(--sans); font-size: 0.84rem; cursor: pointer; text-decoration: underline; }
 
   /* Story hook */
@@ -481,8 +492,10 @@ body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
   .option.selected { background: var(--cut); border-color: var(--a1); border-width: 2px; padding: 0.94rem 0.99rem; }
   .option.correct { background: var(--ok-bg); border-color: var(--a2); border-width: 2px; padding: 0.94rem 0.99rem; }
   .option.wrong { background: var(--no-bg); border-color: var(--clay); border-width: 2px; padding: 0.94rem 0.99rem; }
-  .option.dimmed { opacity: 0.46; }
-  body.alt .option.dimmed { opacity: 0.72; }
+  /* The dimmed state fell below readable contrast at 360px. One rule per mode,
+     and nothing later in the file competes with it. */
+  .option.dimmed, .option-btn.dimmed { opacity: 0.82; }
+  body.dark .option.dimmed, body.dark .option-btn.dimmed { opacity: 0.86; }
   .opt-letter { font-family: var(--serif); font-weight: 800; color: var(--a1); min-width: 1.1rem; }
   .opt-text { flex: 1; }
   .opt-mark { font-weight: 700; font-size: 1.1rem; }
@@ -556,19 +569,8 @@ body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
   .sort-place { font-family: var(--sans); flex: 1; font-size: 0.78rem; font-weight: 700; padding: 0.4rem; background: var(--paper); border: 1px solid var(--hair-strong); cursor: pointer; color: var(--ink); }
 
   /* Running summary */
-  .runsum { background: rgba(var(--a2-rgb),0.08); border: 1px solid rgba(var(--a2-rgb),0.28); border-left: 5px solid var(--a2); padding: 1.3rem 1.4rem; }
-  .runsum-label { font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--a2); font-weight: 700; margin-bottom: 0.9rem; }
-  .runsum ol { margin: 0; padding-left: 1.3rem; }
-  .runsum li { font-size: 1.02rem; line-height: 1.66; margin-bottom: 0.7rem; color: var(--ink); }
-  .runsum li:last-child { margin-bottom: 0; }
-  .runsum li.fresh { font-weight: 700; color: var(--a2); }
 
   /* Popup */
-  .pop-back { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: center; justify-content: center; padding: 1.5rem; z-index: 50; }
-  .pop { background: var(--paper); border-top: 5px solid var(--a2); padding: 1.6rem 1.5rem; max-width: 30rem; width: 100%; box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-  .pop-label { font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--a2); font-weight: 700; margin-bottom: 0.8rem; }
-  .pop-text { font-size: 1.1rem; line-height: 1.6; font-weight: 600; color: var(--ink); margin-bottom: 1.3rem; }
-  .pop-btn { font-family: var(--sans); width: 100%; padding: 0.9rem; background: var(--a2); border: none; color: var(--on-a2); font-size: 0.98rem; font-weight: 700; cursor: pointer; }
 
   /* Nav */
   .nav { display: flex; justify-content: space-between; gap: 0.8rem; margin-top: 1rem; }
@@ -616,6 +618,24 @@ body.alt .figure img { filter: brightness(0.9) contrast(1.02); }
 </div>
 
 <script>
+/* ---- LMS EMBED EVENTS ----------------------------------------------------
+   Two moments, deliberately separate. Reaching the closing screen marks the
+   activity done for progress tracking. Choosing to leave it advances. Firing
+   advance on arrival would pull the learner off their own results screen
+   before they had read it. ------------------------------------------------ */
+var KulaLMS = (function(){
+  var done = false;
+  function send(ev){
+    try{
+      window.parent.postMessage({ type: 'lms-embed-event', version: '1.0',
+        payload: { event: ev } }, '*');
+    }catch(e){}
+  }
+  return {
+    completed: function(){ if(done) return; done = true; send('completed'); },
+    advance:   function(){ send('advance'); }
+  };
+})();
 /* kula: re-entry guard. Every declaration below is function scoped, so a
    viewer that re-runs this script re-initialises instead of throwing a
    redeclaration SyntaxError and leaving FLOW undefined. */
@@ -636,11 +656,7 @@ const COVER = {
 const RESULTS = {
   "eyebrow": "Lesson 4 report",
   "title": "Where you stand",
-  "done": {
-    "label": "Lesson complete",
-    "title": "The Battle Both Sides Won",
-    "text": "Tap Done to continue to Lesson 5, Putting It Together."
-  },
+  "next": "Continue to Lesson 5",
   "footer": "Next: Lesson 5, the full question shape with a paragraph at the end.",
   "bands": {
     "excellent": "You can judge two claims about one event and commit to an answer. Go on to Lesson 5.",
@@ -661,7 +677,7 @@ const FLOW = [
       "One side says they held the line all afternoon against a better team.",
       "The other says the point they took away is the one that keeps them up.",
       "Same nil-all. Two winners.",
-      "Neither of them's making it up. They're counting different things."
+      "Neither of them is making it up. They are counting different things."
     ]
   },
   {
@@ -675,14 +691,14 @@ const FLOW = [
       "Watch it again and decide who deserved it"
     ],
     "correct": 0,
-    "explanation": "Nothing scored. Option {opt0} is the one that can actually be settled. The others end up as opinion, however carefully you argue them. What changed afterwards is evidence.",
+    "explanation": "Nothing scored. Option {opt0} is the one that can actually be settled. The others end up as opinion, no matter how carefully you argue them. You can check what changed afterwards. You cannot check who tried harder.",
     "noSource": true
   },
   {
     "type": "content",
     "tag": "The turn",
-    "html": "<h2>Limitations</h2><p>A limitation isn't a mistake in a source. It's the thing the source was never in a position to tell you.</p><p>A general's memoir knows what his own forces did. It can't tell you what the fighting did to a government's confidence, because that isn't something he could see from where he stood.</p><p>Paper 1 asks this as: <em>comment on the limitations of this source</em>. Answer it by saying what the source couldn't see, not what it got wrong.</p>",
-    "remember": "A general can tell you what his army did. He can't tell you what it cost his government.",
+    "html": "<h2>Limitations</h2><p>A limitation is not a mistake in a source. It is the thing the source was never in a position to tell you.</p><p>A general's memoir knows what his own forces did. It cannot tell you what the fighting did to a government's confidence, because that is not something he could see from where he stood.</p><p>Paper 1 asks this as: <em>comment on the limitations of this source</em>. Answer it by saying what the source could not see, not what it got wrong.</p>",
+    "remember": "A general can tell you what his army did. He cannot tell you what it cost his government.",
     "terms": [
       {
         "term": "Limitation",
@@ -769,7 +785,7 @@ const FLOW = [
     "type": "content",
     "tag": "The evidence",
     "html": "<h2>How a long war paid for itself</h2><p>Wars need money. The MPLA government leaned on Angola's oil, most of it offshore at Cabinda, and the revenue went on defence rather than on rebuilding.</p><p>UNITA had no state to tax, so Savimbi sold what the land held: diamonds, and ivory from elephants killed for the purpose. Both sides could keep fighting because both sides had something to sell.</p><p>That is why the fighting outlasted the Cold War that started it. When the outside powers went home in 1988 and 1989, the money did not.",
-    "remember": "Oil funded one side, diamonds and ivory the other. That's why the war outlived the Cold War.",
+    "remember": "Oil funded one side, diamonds and ivory the other. That is why the war outlived the Cold War.",
     "terms": [
       {
         "term": "Conflict resource",
@@ -784,7 +800,7 @@ const FLOW = [
     "terms": [
       {
         "term": "Cuito Cuanavale",
-        "def": "A town in south-east Angola, and the battle of 1987 to 1988 fought around it. Both sides claimed it, which is why it's examinable."
+        "def": "A town in south-east Angola, and the battle of 1987 to 1988 fought around it. Both sides claimed it, which is why it is examinable."
       },
       {
         "term": "Conventional war",
@@ -813,13 +829,13 @@ const FLOW = [
       2,
       0
     ],
-    "explanation": "November 1975, March 1976, 1987 to 1988, then 1990. The gap in the middle is the thing to hold: twelve years pass between the first withdrawal and the battle. If you compress that, the war looks like one continuous push, and it wasn't.",
+    "explanation": "November 1975, March 1976, 1987 to 1988, then 1990. The gap in the middle is the thing to hold: twelve years pass between the first withdrawal and the battle. If you compress that, the war looks like one continuous push, and it was not.",
     "noSource": true
   },
   {
     "type": "content",
     "tag": "Two verdicts",
-    "html": "<h2>One battle, judged twice</h2><p><strong>Magnus Malan</strong>, South Africa's Minister of Defence, measured the campaign by ground held and losses inflicted. By that measure the South African Defence Force wasn't beaten in the field, and Cuito Cuanavale itself never fell.</p><p><strong>Nelson Mandela</strong> measured it by what it did to the apartheid state: the hold on Namibia given up, and what the fighting told people at home about whether that state could be beaten.</p><p>Neither is inventing anything. They're counting different things, which is why both accounts survive.</p>",
+    "html": "<h2>One battle, judged twice</h2><p><strong>Magnus Malan</strong>, South Africa's Minister of Defence, measured the campaign by ground held and losses inflicted. By that measure the South African Defence Force was not beaten in the field, and Cuito Cuanavale itself never fell.</p><p><strong>Nelson Mandela</strong> measured it by what it did to the apartheid state: the hold on Namibia given up, and what the fighting told people at home about whether that state could be beaten.</p><p>Neither is inventing anything. They are counting different things, which is why both accounts survive.</p>",
     "remember": "Malan counts ground. Mandela counts consequences. Same battle, different yardstick."
   },
   {
@@ -847,7 +863,7 @@ const FLOW = [
       "How fast the United Nations condemned South Africa"
     ],
     "correct": 0,
-    "explanation": "He's measuring political effect: Namibia lost, and the apartheid state shown to be beatable. But option {opt1} is Malan's yardstick, not his. Two people counting different things reach different verdicts without either being wrong, so say which one you're using.",
+    "explanation": "He is measuring political effect. Namibia was lost, and the apartheid state had been shown to be beatable. Option {opt1} is Malan's yardstick, not his. Two people counting different things reach different verdicts without either being wrong. Say which one you are using.",
     "noSource": true
   },
   {
@@ -861,7 +877,7 @@ const FLOW = [
       "Namibian independence and the surrender of UNITA to the MPLA"
     ],
     "correct": 0,
-    "explanation": "Two withdrawals traded against each other, and Namibian independence out of it in 1990. But option {opt1} is the one to watch, because it's what you'd assume a peace deal means. Angola's own war ran on to 2002, so keep the regional settlement and the civil war apart.",
+    "explanation": "Two withdrawals traded against each other, and Namibian independence out of it in 1990. Option {opt1} is the one to watch, because it is what you would assume a peace deal means. Angola's own war ran on to 2002. Keep the regional settlement and the civil war apart.",
     "noSource": true
   },
   {
@@ -875,27 +891,27 @@ const FLOW = [
       "UNITA disbanded and its leaders left Angola for good"
     ],
     "correct": 0,
-    "explanation": "Namibian independence in 1990 is the regional consequence, and it's what the question reaches for. Option {opt3} didn't happen: UNITA fought on for years. An answer that stays inside Angola's borders has answered a smaller question than the one you were set.",
+    "explanation": "Namibian independence in 1990 is the regional consequence, and it is what the question reaches for. Option {opt3} did not happen. UNITA fought on for years. An answer that stays inside Angola's borders has answered a smaller question than the one you were set.",
     "noSource": true
   },
   {
     "type": "question",
     "level": "Evaluate",
-    "q": "What's the main limitation of a defence minister's memoir on Cuito Cuanavale?",
+    "q": "What is the main limitation of a defence minister's memoir on Cuito Cuanavale?",
     "options": [
-      "It can't say what the fighting did to his government",
+      "It cannot say what the fighting did to his government",
       "It gives no reliable detail on troop movements or equipment",
       "It was written decades after the fighting had already finished",
       "It contradicts every other published account of that battle"
     ],
     "correct": 0,
-    "explanation": "He can see his own forces. He can't see what the campaign did to his state's position, because that isn't visible from a command post. But option {opt1} is nearly the opposite of the truth. It's what you reach for when you've mixed up a limitation with a weakness.",
+    "explanation": "He can see his own forces. He cannot see what the campaign did to his state's position, because that is not visible from a command post. But option {opt1} is nearly the opposite of the truth. It is what you reach for when you have mixed up a limitation with a weakness.",
     "noSource": true
   },
   {
     "type": "question",
     "level": "Evaluate",
-    "q": "A learner writes: both sides claimed victory, so we cannot know who won. What's wrong with that?",
+    "q": "A learner writes: both sides claimed victory, so we cannot know who won. What is wrong with that?",
     "options": [
       "It refuses to judge, when the outcomes afterwards can be weighed",
       "It is wrong, because only one of the two sides ever claimed victory",
@@ -903,14 +919,14 @@ const FLOW = [
       "It relies too heavily on evidence from Cuban and Soviet records"
     ],
     "correct": 0,
-    "explanation": "Cannot know is a refusal dressed as caution. Namibia's independence and the Cuban withdrawal are both on the record, so there's something to weigh. Option {opt2} is worth thinking about, because the two accounts genuinely don't disagree on the fighting. But they do disagree on what it meant, and you're asked about that.",
+    "explanation": "Cannot know is a refusal dressed as caution. Namibia's independence and the Cuban withdrawal are both on the record, so there is something to weigh. Option {opt2} is worth thinking about. The two accounts do not disagree about the fighting. They disagree about what it meant, and that is what you were asked.",
     "noSource": true
   },
   {
     "type": "content",
     "tag": "What this lesson covers that the exam question doesn't",
-    "html": "<h2>Worth knowing before Lesson 5</h2><p>The question you'll sit in Lesson 5 runs from 1974 to about 1976. Everything in this lesson happens later.</p><p>That's deliberate. Cuito Cuanavale and the settlement are examinable content in their own right, and a question in another year can land on them.</p><p>So don't drop this lesson because it sits outside the dates of the next one. In Lesson 5 it becomes your own knowledge, which is the part of the paragraph question the sources can't give you.</p>",
-    "remember": "Everything after 1976 sits outside the next question and inside the syllabus. That's what own knowledge means."
+    "html": "<h2>Worth knowing before Lesson 5</h2><p>The question you will sit in Lesson 5 runs from 1974 to about 1976. Everything in this lesson happens later.</p><p>That is deliberate. Cuito Cuanavale and the settlement are examinable content in their own right, and a question in another year can land on them.</p><p>So do not drop this lesson because it sits outside the dates of the next one. In Lesson 5 it becomes your own knowledge, which is the part of the paragraph question the sources cannot give you.</p>",
+    "remember": "Everything after 1976 sits outside the next question and inside the syllabus. That is what own knowledge means."
   },
   {
     "type": "carousel",
@@ -950,30 +966,9 @@ const FLOW = [
     ]
   },
   {
-    "type": "question",
-    "build": true,
-    "part": "By 1988 the foreign involvement had become a conventional war, and Cuito Cuanavale is where its outcome was argued twice. Malan counted ground, Mandela counted consequences",
-    "q": "Which sentence closes the answer you've been building?",
-    "options": [
-      "By 1988 the foreign involvement had become a conventional war, and Cuito Cuanavale is where its outcome was argued twice. Malan counted ground, Mandela counted consequences",
-      "The battle of Cuito Cuanavale was fought in south-eastern Angola across 1987 and into 1988, and in the end neither side managed to capture the town they had been fighting over",
-      "Magnus Malan called the campaign a clear victory for the South African Defence Force, while Nelson Mandela called that same battle a turning point for the whole of the continent"
-    ],
-    "correct": 0,
-    "explanation": "A closing sentence says what it all amounted to. Option {opt0} does that, and it reaches past the fighting to the consequence. But options {opt1} and {opt2} both stop at description, and you've already got three sentences of argument in front of them.",
-    "noSource": true,
-    "buildLabel": "What Lesson 4 argues"
-  },
-  {
-    "type": "runsum",
-    "tag": "Your running summary",
-    "heading": "What this lesson argues",
-    "label": "The argument so far"
-  },
-  {
     "type": "content",
     "tag": "Beyond the exam",
-    "html": "<h2>Deciding what winning meant</h2><p>Two people can look at the same afternoon and count different things, and both be telling you the truth.</p><p>That isn't a reason to give up on judging. It's a reason to say what you're measuring before you announce a verdict.</p><p>An election, an argument, a season, a job you didn't get. Someone will tell you it went well and someone will tell you it didn't. Ask what each of them is counting, then decide which measure actually matters here.</p>",
+    "html": "<h2>Deciding what winning meant</h2><p>Two people can look at the same afternoon and count different things, and both be telling you the truth.</p><p>That is not a reason to give up on judging. It is a reason to say what you are measuring before you announce a verdict.</p><p>An election, an argument, a season, a job you did not get. Someone will tell you it went well and someone will tell you it did not. Ask what each of them is counting, then decide which measure actually matters here.</p>",
     "terms": [
       {
         "term": "Own knowledge",
@@ -1015,10 +1010,8 @@ const state = {
   order: {},               // qIdx -> shuffled content-index array
   carRead: {},             // stepIdx -> Set of read card indices
   interState: {},          // qIdx -> working state for order/sort
-  poppedBuild: {},         // qIdx -> bool (running-summary popup already shown)
 };
 
-const buildIds = FLOW.map((f,i)=>f.build?i:null).filter(i=>i!==null);
 const assessedIds = FLOW.map((f,i)=>(f.type==="question"&&f.level)?i:null).filter(i=>i!==null);
 
 function esc(s){
@@ -1366,30 +1359,6 @@ function renderSort(item){
   });
 }
 
-// ============ RUNNING SUMMARY (own screen) ============
-function renderRunsum(item){
-  const parts = buildIds.filter(i=>i<=state.idx && state.revealed[i]).map(i=>FLOW[i].part);
-  const freshIdx = parts.length-1;
-  const lis = parts.map((p,i)=>`<li class="${i===freshIdx?"fresh":""}">${esc(p)}</li>`).join("");
-  stage.innerHTML = `
-    <div class="card">
-      <div class="stage-tag">${esc(item.tag||"Your running summary")}</div>
-      ${item.heading?`<h2>${esc(item.heading)}</h2>`:""}
-      ${item.html?item.html:""}
-      <div class="runsum"><div class="runsum-label">${esc(item.label||"Your running summary")}</div><ol>${lis}</ol></div>
-      ${item.outro?`<p class="runsum-outro">${item.outro}</p>`:""}
-    </div>`;
-}
-
-// ============ POPUP after a build question ============
-function showBuildPop(part, label){
-  const back=document.createElement("div");
-  back.className="pop-back";
-  back.innerHTML=`<div class="pop"><div class="pop-label">${esc(label||"The line this lesson argues")}</div><div class="pop-text">${esc(part)}</div><button class="pop-btn" id="pop-ok">Got it</button></div>`;
-  document.body.appendChild(back);
-  document.getElementById("pop-ok").addEventListener("click",()=>back.remove());
-}
-
 // ============ NAV ============
 function syncNav(isQuestion){
   nav.classList.remove("hidden");
@@ -1418,12 +1387,6 @@ function syncNavInteractive(canCheck, answered, onCheck){
 }
 
 function defaultNext(){
-  // fire the running-summary popup when leaving a build question
-  const cur=FLOW[state.idx];
-  if(cur && cur.build && state.revealed[state.idx] && !state.poppedBuild[state.idx]){
-    state.poppedBuild[state.idx]=true;
-    showBuildPop(cur.part, cur.buildLabel);
-  }
   if(state.idx<FLOW.length-1){ state.idx++; render(); } else showResults();
 }
 
@@ -1448,7 +1411,6 @@ function render(){
     case "stat": renderStat(item); syncNav(false); break;
     case "source": renderSource(item); syncNav(false); break;
     case "question": renderQuestion(item); break;
-    case "runsum": renderRunsum(item); syncNav(false); break;
     default: renderContent(item); syncNav(false);
   }
 }
@@ -1489,8 +1451,6 @@ function showResults(){
     const p=Math.round(g/ids.length*100);
     return `<div class="bd-row"><div class="bd-name">${sp}</div><div class="bd-bar"><div class="bd-fill" style="width:${p}%"></div></div><div class="bd-score">${g}/${ids.length}</div></div>`;
   }).join("");
-  const parts=buildIds.filter(i=>state.revealed[i]).map(i=>FLOW[i].part);
-  const runsum = parts.length?`<div class="breakdown"><div class="breakdown-label">Your running summary</div><ol style="margin:0;padding-left:1.3rem;">${parts.map(p=>`<li style="font-size:0.98rem;line-height:1.62;margin-bottom:0.6rem;">${esc(p)}</li>`).join("")}</ol></div>`:"";
   stage.innerHTML = `
     <div class="results-head">
       <div class="results-eyebrow">${RESULTS.eyebrow||"Lesson report"}</div>
@@ -1503,24 +1463,19 @@ function showResults(){
     </div>
     <div class="grade-desc">${desc}</div>
     <div class="breakdown"><div class="breakdown-label">By skill</div>${rows}</div>
-    ${runsum}
     <div class="results-actions">
       <button class="btn-secondary" id="restart-btn">Restart lesson</button>
-      <button class="btn-primary" id="finish-btn">Finish &rarr;</button>
+      <button class="btn-primary" id="finish-btn">${esc(RESULTS.next||"Continue")} &rarr;</button>
     </div>
-    ${RESULTS.footer?`<div style="text-align:center;margin-top:1.1rem;font-size:0.92rem;color:var(--fade);">${esc(RESULTS.footer)}</div>`:""}`;
+    ${RESULTS.footer?`<div style="text-align:center;margin-top:1.1rem;padding-bottom:4.5rem;font-size:0.92rem;color:var(--fade);">${esc(RESULTS.footer)}</div>`:""}`;
   document.getElementById("restart-btn").addEventListener("click",()=>{
-    state.idx=-1; state.answers={}; state.revealed={}; state.order={}; state.carRead={}; state.interState={}; state.poppedBuild={};
+    state.idx=-1; state.answers={}; state.revealed={}; state.order={}; state.carRead={}; state.interState={};
     renderCover();
   });
-  document.getElementById("finish-btn").addEventListener("click",()=>{
-    const back=document.createElement("div");
-    back.className="pop-back";
-    const D = RESULTS.done||{};
-    back.innerHTML=`<div class="pop"><div class="pop-label">${esc(D.label||"Lesson complete")}</div>${D.title?`<h3 style="margin:.4rem 0 .2rem;font-size:1.05rem;">${esc(D.title)}</h3>`:""}<div class="pop-text">${esc(D.text||"Tap Done to continue to the next lesson.")}</div><button class="pop-btn" id="fin-ok">Done</button></div>`;
-    document.body.appendChild(back);
-    document.getElementById("fin-ok").addEventListener("click",()=>back.remove());
-  });
+  /* The button at the end of the lesson is the thing that continues. It does
+     not point at a control somewhere else on the page. */
+  document.getElementById("finish-btn").addEventListener("click",()=>{ KulaLMS.advance(); });
+  KulaLMS.completed();
 }
 
 function isRight(i){
@@ -1539,30 +1494,36 @@ renderCover();
    Injects its own button so there is no stray markup, and lives inside the
    single script block so a first-to-last script extraction still parses. */
 (function(){
-  var NATIVE = "light";
-  try{ if(localStorage.getItem("kula-mode")==="alt"){ document.body.classList.add("alt"); } }catch(e){}
+  /* What is stored is the mode the learner chose, "light" or "dark". Never a
+     class name and never "native": neither describes anything on a unit built
+     the other way round. For an essay unit set NATIVE "dark", FLIP "light",
+     CLS "bright". Nothing else changes. */
+  var NATIVE = "light";   // the mode this unit is designed in
+  var FLIP   = "dark";    // the mode the toggle offers
+  var CLS    = "dark";    // the class that produces FLIP in this unit
+  try{ if(localStorage.getItem("kula-mode")===FLIP){ document.body.classList.add(CLS); } }catch(e){}
   var SUN='<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/>';
   var MOON='<path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/>';
-  var b=document.getElementById("mode-toggle");
+  var b=document.getElementById("kula-mode-toggle");
   if(!b){
     b=document.createElement("button");
-    b.className="mode-toggle"; b.id="mode-toggle"; b.type="button";
+    b.className="mode-toggle"; b.id="kula-mode-toggle"; b.type="button";
     b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" id="mode-icon"></svg><span id="mode-label"></span>';
     document.body.appendChild(b);
   }
   var lab=document.getElementById("mode-label"), ic=document.getElementById("mode-icon");
   function paint(){
-    var onAlt=document.body.classList.contains("alt");
-    var showing = onAlt ? (NATIVE==="dark" ? "light" : "dark") : NATIVE;
+    var flipped = document.body.classList.contains(CLS);
+    var showing = flipped ? FLIP : NATIVE;
     var offering = showing==="dark" ? "light" : "dark";
-    lab.textContent = offering==="light" ? "Light Mode" : "Dark Mode";
+    lab.textContent = offering==="light" ? "Light mode" : "Dark mode";
     ic.innerHTML = offering==="light" ? SUN : MOON;
-    b.setAttribute("aria-pressed", onAlt ? "true" : "false");
+    b.setAttribute("aria-pressed", showing==="dark" ? "true" : "false");
     b.setAttribute("aria-label", "Switch to " + offering + " mode");
   }
   b.addEventListener("click",function(){
-    var onAlt=document.body.classList.toggle("alt");
-    try{ localStorage.setItem("kula-mode", onAlt ? "alt" : "native"); }catch(e){}
+    var flipped=document.body.classList.toggle(CLS);
+    try{ localStorage.setItem("kula-mode", flipped ? FLIP : NATIVE); }catch(e){}
     paint();
   });
   paint();
